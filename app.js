@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const width = window.innerWidth, height = window.innerHeight;
 
@@ -6,6 +7,9 @@ const width = window.innerWidth, height = window.innerHeight;
 
 const camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 10);
 camera.position.z = 1;
+camera.position.x = 1;
+camera.position.y = 1;
+camera.lookAt(0, 0, 0);
 
 const scene = new THREE.Scene();
 
@@ -19,6 +23,13 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(width, height);
 renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
+let controls = new OrbitControls(camera, renderer.domElement);
+
+const size = 3;
+const divisions = 40;
+
+const gridHelper = new THREE.GridHelper(size, divisions);
+scene.add(gridHelper);
 
 // animation
 
